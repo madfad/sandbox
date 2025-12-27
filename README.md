@@ -2,8 +2,7 @@
 
 **Circuitry** is a 2D puzzle game where you play as an electronic device that evolves and gains new abilities as you collect gears and solve puzzles.
 
-![Game Banner](https://via.placeholder.com/800x200.png?text=CIRCUITRY+GAME)
-*(Note: You can replace this image with a screenshot of your game after deployment)*
+
 
 ## 🎮 Play the Game
 **[Click here to play the game!](https://YOUR_USERNAME.github.io/device-evolution-game/)**
