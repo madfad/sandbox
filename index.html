@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Device Evolution Game - A puzzle game where you play as electronic devices and evolve through challenges">
+    <title>Circuitry - Device Evolution Game</title>
+    <link rel="stylesheet" href="css/game.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container">
+        <div id="game-header">
+            <h1>⚡ CIRCUITRY ⚡</h1>
+            <p class="subtitle">Evolve. Connect. Illuminate.</p>
+        </div>
+
+        <div id="ui-panel">
+            <div id="device-display">
+                <span class="label">DEVICE:</span>
+                <span id="current-device">Light Switch</span>
+            </div>
+            <div id="gear-display">
+                <span class="label">GEARS:</span>
+                <span id="gear-count">0</span>
+                <span class="next-upgrade">/ <span id="next-upgrade">5</span> to upgrade</span>
+            </div>
+            <div id="level-display">
+                <span class="label">LEVEL:</span>
+                <span id="current-level">1 - The Workshop</span>
+            </div>
+        </div>
+
+        <canvas id="game-canvas"></canvas>
+
+        <div id="message-box">
+            <p id="message-text">Use WASD or Arrow Keys to move. Find the wire ends and connect them!</p>
+        </div>
+
+        <div id="controls-hint">
+            <span>🎮 WASD to Move</span>
+            <span>🔄 E/F to Switch Device</span>
+            <span>⚙️ Collect gears to unlock</span>
+        </div>
+    </div>
+
+    <div id="upgrade-modal" class="modal hidden">
+        <div class="modal-content">
+            <button id="upgrade-close-btn" class="modal-close">✕</button>
+            <h2>⚡ EVOLUTION READY ⚡</h2>
+            <p>You've collected enough gears!</p>
+            <div id="evolution-preview"></div>
+            <p class="evolve-text">Press <kbd>E</kbd> to evolve into:</p>
+            <div id="next-device-preview">
+                <span class="device-name">FLASHLIGHT</span>
+                <span class="device-ability">Illuminate dark areas!</span>
+            </div>
+            <p class="dismiss-hint">Press <kbd>ESC</kbd> or ✕ to continue without upgrading</p>
+        </div>
+    </div>
+
+    <div id="level-complete-modal" class="modal hidden">
+        <div class="modal-content success">
+            <h2>🎉 LEVEL COMPLETE! 🎉</h2>
+            <p id="level-stats"></p>
+            <button id="next-level-btn">NEXT LEVEL →</button>
+        </div>
+    </div>
+
+    <!-- Game Scripts -->
+    <script src="js/engine/sprites.js"></script>
+    <script src="js/engine/renderer.js"></script>
+    <script src="js/engine/input.js"></script>
+    <script src="js/engine/collision.js"></script>
+    <script src="js/engine/particles.js"></script>
+    <script src="js/entities/player.js"></script>
+    <script src="js/entities/wire.js"></script>
+    <script src="js/entities/gear.js"></script>
+    <script src="js/entities/door.js"></script>
+    <script src="js/entities/mirror.js"></script>
+    <script src="js/entities/crate.js"></script>
+    <script src="js/entities/windobj.js"></script>
+    <script src="js/entities/puzzles.js"></script>
+    <script src="js/systems/evolution.js"></script>
+    <script src="js/systems/puzzle.js"></script>
+    <script src="js/systems/levelgen.js"></script>
+    <script src="js/levels/level1.js"></script>
+    <script src="js/levels/level2.js"></script>
+    <script src="js/levels/level3.js"></script>
+    <script src="js/levels/level4.js"></script>
+    <script src="js/levels/level5.js"></script>
+    <script src="js/levels/level6.js"></script>
+    <script src="js/levels/level7.js"></script>
+    <script src="js/levels/level8.js"></script>
+    <script src="js/levels/level9.js"></script>
+    <script src="js/levels/level10.js"></script>
+    <script src="js/levels/level11.js"></script>
+    <script src="js/levels/level12.js"></script>
+    <script src="js/levels/level13.js"></script>
+    <script src="js/levels/level14.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
