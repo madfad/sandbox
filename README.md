@@ -5,7 +5,7 @@
 
 
 ## 🎮 Play the Game
-**[Click here to play the game!](https://YOUR_USERNAME.github.io/device-evolution-game/)**
+**[Click here to play the game!](https://madfad.github.io/sandbox/)**
 *(Replace `YOUR_USERNAME` with your GitHub username after creating the repository)*
 
 ## 🕹️ Controls
