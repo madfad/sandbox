@@ -33,15 +33,21 @@ DAZ downloads require an account and licence acceptance, so this can't be script
 
 Check the preview MP4 / T-pose in `outputs/g8f/`. If the facing looks wrong, adjust FACE_R/FACE_L.
 
-## 4. Generate motion
-The dance/walk model needs the released checkpoint and dataset features
-(https://huggingface.co/Linzhan/UniMate, https://huggingface.co/datasets/Linzhan/UniML3D).
-Inference (`unimate.inference.sample`) takes an `object_type` that exists in the dataset, so
-a brand-new custom character is animated by pairing its `cond.npy` with a motion `.npz`;
-see UniMate `data_process/README.md` -> "Custom Assets", step 3:
+## 4. Start with Mixamo (recommended first run)
+The shipped sampler only accepts skeletons ("object types") that exist in the dataset, and
+Mixamo's Y Bot humanoid is one of them, so it works without any custom rig. Run stage by stage:
 
-    cd UniMate
-    CHAR_PATH=../outputs/g8f/g8f_canonical.glb ANIM_PATH=<motion.npz> \
-        bash data_process/scripts/run_animate_lbs.sh
+    ./mixamo_trial.sh download
+    ./mixamo_trial.sh features
+    ./mixamo_trial.sh sample     # edit mixamo_cases.json prompts as you like
+    ./mixamo_trial.sh animate
 
-Not yet verified end to end: the sandbox has no GPU and no DAZ asset.
+Written without Hugging Face access; the checkpoint and dataset layouts come from the docs, so
+check each stage's output. Open questions: whether the preview checkpoint is trained on a
+Truebones/Objaverse mixture (then their features must be present too; Truebones motions are
+not downloadable), and the exact `object_type` string ("mixamo" is assumed).
+
+## 5. Later: the DAZ character
+Not verified. Genesis 8 is not a dataset skeleton and probably exceeds the `max_joints=60` used
+by the `uniml3d_*` configs. Check the joint count in the `cond.npy` from step 3, then register
+it for sampling, or retarget Mixamo output onto the DAZ mesh in Blender.
