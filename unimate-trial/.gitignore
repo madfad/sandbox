@@ -4,3 +4,5 @@ assets_daz/*
 outputs/*
 !outputs/.gitkeep
 UniMate/
+assets_mixamo/*
+!assets_mixamo/.gitkeep
