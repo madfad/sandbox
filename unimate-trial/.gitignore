@@ -1,0 +1,6 @@
+# DAZ content is licensed and must not be redistributed via git
+assets_daz/*
+!assets_daz/.gitkeep
+outputs/*
+!outputs/.gitkeep
+UniMate/
