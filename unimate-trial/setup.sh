@@ -10,7 +10,9 @@ conda activate unimate
 pip install "setuptools<81"
 # UniMate pins torch 2.5.1+cu124, which has no kernels for Blackwell GPUs (RTX 50xx, sm_120).
 # Install everything else first, then torch from the cu128 index.
-grep -Ev '^(torch|torchvision)==|extra-index-url https://download.pytorch.org' UniMate/requirements.txt > requirements.wsl.txt
+# bpy==4.0.0 (cp310) is no longer downloadable; it is only needed for the EEVEE render stage,
+# other stages use the `blender` executable, so it is dropped here.
+grep -Ev '^(torch|torchvision|bpy)==|extra-index-url https://download.(pytorch|blender).org' UniMate/requirements.txt > requirements.wsl.txt
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
 pip install -r requirements.wsl.txt --no-build-isolation
 python - <<'PY'
