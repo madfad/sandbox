@@ -6,11 +6,13 @@
 #   types         list the object types the sampler will accept
 #   sample        text -> motion for the Mixamo skeleton (edit mixamo_cases.json first)
 #   blender_libs  install the Python libs Blender needs into ~/blender_pylibs (once, before animate)
+#   fixchar <in.fbx>  rename mixamorig1: bones to mixamorig: -> <in>_fixed.fbx (needed for some Mixamo characters)
 #   animate       drive a Mixamo mesh with the generated motion (GLB + FBX); CHAR_PATH=... overrides Y Bot
 # The released run is trained on truebones+mixamo+objaverse, but Truebones motions are a commercial
 # pack, so the sampler is pointed at a copy of the run whose config only lists mixamo.
 set -euo pipefail
-cd "$(dirname "$0")/UniMate"
+HERE="$(cd "$(dirname "$0")" && pwd)"
+cd "$HERE/UniMate"
 source "$(conda info --base)/etc/profile.d/conda.sh"; conda activate unimate
 SRC=outputs/unimate_ckpt/unimate_uniml3d_f60_v2   # recommended run (README)
 EXP=outputs/mixamo_only
@@ -60,6 +62,9 @@ blender_libs)
   pip install --target "$LIBS" --no-deps filelock typing-extensions sympy mpmath networkx jinja2 markupsafe fsspec
   pip install --target "$LIBS" --no-deps --no-build-isolation "git+https://github.com/inbar-2344/Motion.git"
   ls "$LIBS" | head -40 ;;
+fixchar)
+  IN=$(realpath "${2:?usage: ./mixamo_trial.sh fixchar /path/char.fbx}")
+  blender -b -P "$HERE/fix_mixamo_prefix.py" -- "$IN" "${IN%.fbx}_fixed.fbx" 2>&1 | grep -E "FIXPREFIX|Error|error" ;;
 animate)
   export PYTHONPATH="$HOME/blender_pylibs${PYTHONPATH:+:$PYTHONPATH}"
   bash scripts/run_animate_motion.sh mixamo "$EXP/samples_mixamo_cases/motions" "../outputs/${OUT_NAME:-mixamo_animated}" ;;
