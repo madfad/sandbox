@@ -62,6 +62,6 @@ blender_libs)
   ls "$LIBS" | head -40 ;;
 animate)
   export PYTHONPATH="$HOME/blender_pylibs${PYTHONPATH:+:$PYTHONPATH}"
-  bash scripts/run_animate_motion.sh mixamo "$EXP/samples_mixamo_cases/motions" ../outputs/mixamo_animated ;;
+  bash scripts/run_animate_motion.sh mixamo "$EXP/samples_mixamo_cases/motions" "../outputs/${OUT_NAME:-mixamo_animated}" ;;
 *) sed -n 2,10p "$0"; exit 1 ;;
 esac
