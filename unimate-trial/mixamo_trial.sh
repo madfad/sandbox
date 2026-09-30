@@ -1,11 +1,12 @@
 #!/bin/bash
 # Mixamo-first trial. Run stages in order: ./mixamo_trial.sh <stage>
-#   download  (done) checkpoint + Mixamo raw data + UniML3D exports
-#   features  build dataset/features/mixamo (stage 4; stage 4)
-#   setup_exp make outputs/mixamo_only: v2 checkpoint, config restricted to the mixamo dataset
-#   types     list the object types the sampler will accept
-#   sample    text -> motion for the Mixamo skeleton (edit mixamo_cases.json first)
-#   animate   drive a Mixamo mesh with the generated motion (GLB + FBX); CHAR_PATH=... overrides Y Bot
+#   download      (done) checkpoint + Mixamo raw data + UniML3D exports
+#   features      build dataset/features/mixamo (stage 4)
+#   setup_exp     make outputs/mixamo_only: v2 checkpoint, config restricted to the mixamo dataset
+#   types         list the object types the sampler will accept
+#   sample        text -> motion for the Mixamo skeleton (edit mixamo_cases.json first)
+#   blender_libs  install the Python libs Blender needs into ~/blender_pylibs (once, before animate)
+#   animate       drive a Mixamo mesh with the generated motion (GLB + FBX); CHAR_PATH=... overrides Y Bot
 # The released run is trained on truebones+mixamo+objaverse, but Truebones motions are a commercial
 # pack, so the sampler is pointed at a copy of the run whose config only lists mixamo.
 set -euo pipefail
@@ -50,7 +51,17 @@ JSON
   # Keys are "<object_type>-<tag>"; replace "mixamo" with the type printed by `types` if it differs.
   SEED=0 REPLICATE=2 bash scripts/run_sample_motion_text.sh "$EXP" ../mixamo_cases.json 3.0
   ls "$EXP"/samples_mixamo_cases ;;
+blender_libs)
+  # Blender runs scripts with its own bundled Python (3.10, old numpy), not this conda env.
+  # Same ABI as the env, so install a consistent numpy<2 set into a folder Blender reads via PYTHONPATH.
+  LIBS="$HOME/blender_pylibs"
+  pip install --target "$LIBS" "numpy==1.26.4" "scipy<1.14" "matplotlib<3.10" pillow imageio loguru tqdm
+  pip install --target "$LIBS" --no-deps torch --index-url https://download.pytorch.org/whl/cpu
+  pip install --target "$LIBS" --no-deps filelock typing-extensions sympy mpmath networkx jinja2 markupsafe fsspec
+  pip install --target "$LIBS" --no-deps --no-build-isolation "git+https://github.com/inbar-2344/Motion.git"
+  ls "$LIBS" | head -40 ;;
 animate)
+  export PYTHONPATH="$HOME/blender_pylibs${PYTHONPATH:+:$PYTHONPATH}"
   bash scripts/run_animate_motion.sh mixamo "$EXP/samples_mixamo_cases/motions" ../outputs/mixamo_animated ;;
 *) sed -n 2,10p "$0"; exit 1 ;;
 esac
