@@ -82,6 +82,16 @@ It shows two groups: **your characters** (files you added, like Ch47_nonPBR) and
 that came with the dataset you downloaded (Amy, Y_Bot and others). Use the names exactly as listed (upper or
 lower case does not matter).
 
+**See pictures of all characters:**
+```bash
+./make_gallery.sh
+```
+This builds a page with a picture and the name of every character and opens it in your browser (it is saved in
+Windows **Downloads\unimate\characters\characters.html**, so you can reopen it later). Type in the box at the top
+to filter by name; click a `--char Name` line to select it for copying. The first run may take a few minutes:
+pictures come from the dataset where available, and Blender draws the rest (and your own characters). Later runs
+only draw new characters. `./make_gallery.sh --rerender` redraws everything as plain front views.
+
 **Use a character for one run:** put `--char Name` before the sentences:
 ```bash
 ./make_animation.sh --char Amy "A person bows."

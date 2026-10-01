@@ -13,6 +13,7 @@ animated files in your Windows Downloads folder (`./make_animation.sh "A person 
 ## Layout
 - `make_animation.sh` - sentences -> sample -> animate -> copy to Windows Downloads, in one command; `--list`, `--char`, `--add`, `--default` manage characters
 - `setup.sh` - clone UniMate into `UniMate/` (git-ignored) and build the `unimate` conda env
+- `make_gallery.sh` + `render_characters.py` - picture gallery of all characters, opened in the Windows browser
 - `mixamo_trial.sh` - every pipeline stage (`download`, `features`, `setup_exp`, `types`, `sample`, `blender_libs`, `fixchar`, `animate`, `captions`)
 - `mixamo_cases.json` - default prompts file
 - `fix_mixamo_prefix.py` - used by `fixchar`
