@@ -11,7 +11,7 @@ SIGGRAPH Asia 2026): type a sentence, get a skeleton animation, apply it to a ri
 animated files in your Windows Downloads folder (`./make_animation.sh "A person jumps."`).
 
 ## Layout
-- `make_animation.sh` - sentences -> sample -> animate -> copy to Windows Downloads, in one command
+- `make_animation.sh` - sentences -> sample -> animate -> copy to Windows Downloads, in one command; `--list`, `--char`, `--add`, `--default` manage characters
 - `setup.sh` - clone UniMate into `UniMate/` (git-ignored) and build the `unimate` conda env
 - `mixamo_trial.sh` - every pipeline stage (`download`, `features`, `setup_exp`, `types`, `sample`, `blender_libs`, `fixchar`, `animate`, `captions`)
 - `mixamo_cases.json` - default prompts file

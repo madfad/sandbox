@@ -72,22 +72,39 @@ Put these in front of the command:
 
 Example: `REPLICATE=4 SEED=random ./make_animation.sh "A person dances happily."`
 
-## Using a different Mixamo character
+## Changing the character
 
-1. Download it from mixamo.com: Format **FBX Binary (.fbx)**, Pose **T-pose**.
-2. In Ubuntu, copy it from Windows Downloads (change the file name):
+**See which characters you can use:**
+```bash
+./make_animation.sh --list
+```
+It shows two groups: **your characters** (files you added, like Ch47_nonPBR) and **built-in Mixamo characters**
+that came with the dataset you downloaded (Amy, Y_Bot and others). Use the names exactly as listed (upper or
+lower case does not matter).
+
+**Use a character for one run:** put `--char Name` before the sentences:
+```bash
+./make_animation.sh --char Amy "A person bows."
+```
+
+**Change the default** (used whenever you leave out `--char`):
+```bash
+./make_animation.sh --default Amy
+```
+Until you set one, the default is your first own character (Ch47_nonPBR), or Y_Bot if you have none.
+
+**Add a new character from Mixamo:**
+1. On mixamo.com pick a character and click Download with Format **FBX Binary (.fbx)** and Pose **T-pose**.
+   It lands in your Windows **Downloads** folder.
+2. In Ubuntu, give the file name (in quotes if it has spaces):
    ```bash
-   cp /mnt/c/Users/madfa/Downloads/NewCharacter.fbx ~/sandbox/unimate-trial/assets_mixamo/
+   ./make_animation.sh --add "NewCharacter.fbx"
    ```
-3. Run the bone-name fix once (harmless if the character does not need it):
-   ```bash
-   ./mixamo_trial.sh fixchar $HOME/sandbox/unimate-trial/assets_mixamo/NewCharacter.fbx
-   ```
-4. Use it:
-   ```bash
-   CHAR_PATH=$HOME/sandbox/unimate-trial/assets_mixamo/NewCharacter_fixed.fbx ./make_animation.sh "A person bows."
-   ```
-   Without `CHAR_PATH`, the script uses the first `*_fixed.fbx` file in `assets_mixamo`.
+   This copies it from Downloads, fixes the bone names if needed (about 30 seconds), and tells you the name to use.
+3. Use it: `./make_animation.sh --char NewCharacter "A person waves."`
+
+Notes: built-in characters are used as they are; whether every one of them looks right has not been checked.
+Characters that are not from Mixamo will not work with this command.
 
 ## If something goes wrong
 
