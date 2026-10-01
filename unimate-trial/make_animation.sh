@@ -67,7 +67,7 @@ list_chars() {
   echo "Default character: ${d:-first of your characters, else Y_Bot}"
   echo; echo "Your characters (assets_mixamo):"; my_names | sed 's/^/  /'
   echo; echo "Built-in Mixamo characters (from the dataset):"
-  builtin_names | column -c 100 2>/dev/null | sed 's/^/  /' || builtin_names | sed 's/^/  /'
+  builtin_names | column -c 100 2>/dev/null | expand | sed 's/^/  /' || builtin_names | sed 's/^/  /'
 }
 
 add_char() {  # $1 = file name in Windows Downloads, or a path
