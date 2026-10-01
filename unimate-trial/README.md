@@ -7,7 +7,11 @@ SIGGRAPH Asia 2026): type a sentence, get a skeleton animation, apply it to a ri
 - Mixamo character + text prompts -> animated GLB/FBX: **works**.
 - DAZ 3D (Genesis 8) character: **not attempted yet** (see the last section).
 
+**New to Ubuntu/WSL? Start with [GETTING_STARTED.md](GETTING_STARTED.md)**: one command turns sentences into
+animated files in your Windows Downloads folder (`./make_animation.sh "A person jumps."`).
+
 ## Layout
+- `make_animation.sh` - sentences -> sample -> animate -> copy to Windows Downloads, in one command
 - `setup.sh` - clone UniMate into `UniMate/` (git-ignored) and build the `unimate` conda env
 - `mixamo_trial.sh` - every pipeline stage (`download`, `features`, `setup_exp`, `types`, `sample`, `blender_libs`, `fixchar`, `animate`, `captions`)
 - `mixamo_cases.json` - default prompts file

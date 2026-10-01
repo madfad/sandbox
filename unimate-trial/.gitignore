@@ -7,3 +7,4 @@ UniMate/
 assets_mixamo/*
 !assets_mixamo/.gitkeep
 requirements.wsl.txt
+prompts/
